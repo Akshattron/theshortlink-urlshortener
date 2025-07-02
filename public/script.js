@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost:3000"; // backend URL
+const baseUrl = "https://theshortlink.vercel.app"; // backend URL
 
 // DOM Elements
 const sidebar = document.querySelector('.sidebar');

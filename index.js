@@ -16,8 +16,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 const corsOptions = {
     origin: [
-        'https://tsltest.vercel.app',
-        'http://localhost:3000',
+        'https://theshortlink.vercel.app'
     ],
     credentials: true,
     optionsSuccessStatus: 200

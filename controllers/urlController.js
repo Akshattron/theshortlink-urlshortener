@@ -4,7 +4,7 @@ const shortid = require('shortid');
 const shortenUrl = async (req, res) => {
     try {
         const { longUrl } = req.body;
-        const baseUrl = process.env.BASE_URL || 'http://localhost:3000';
+        const baseUrl = process.env.BASE_URL || 'https://theshortlink.vercel.app';
         
         // Generate short code
         const urlCode = shortid.generate();
