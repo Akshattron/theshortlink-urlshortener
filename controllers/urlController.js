@@ -33,7 +33,8 @@ const redirectUrl = async (req, res) => {
         const url = await UrlModel.findOne({ urlCode });
 
         if (!url) {
-            return res.status(404).json({ message: 'URL not found' });
+            res.status(404).json({ message: 'URL not found' });
+            return;
         }
 
         res.redirect(url.longUrl);
@@ -46,7 +47,8 @@ const redirectUrl = async (req, res) => {
 const getUserUrls = async (req, res) => {
     try {
         if (!req.user) {
-            return res.status(401).json({ message: 'Not authenticated' });
+            res.status(401).json({ message: 'Not authenticated' });
+            return
         }
 
         const urls = await UrlModel.find({ user: req.user._id }).sort({ date: -1 });

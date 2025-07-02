@@ -5,7 +5,8 @@ const authMiddleware = async (req, res, next) => {
     const token = req.headers.authorization?.split(' ')[1];
     
     if (!token) {
-        return next();
+        next();
+        return
     }
 
     try {
@@ -13,7 +14,8 @@ const authMiddleware = async (req, res, next) => {
         const user = await UserModel.findById(decoded.userId);
         
         if (!user) {
-            return res.status(401).json({ message: 'User not found' });
+            res.status(401).json({ message: 'User not found' });
+            return
         }
 
         req.user = user;

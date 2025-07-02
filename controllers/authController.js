@@ -9,7 +9,8 @@ const signup = async (req, res) => {
         // Check if user exists
         const existingUser = await UserModel.findOne({ username });
         if (existingUser) {
-            return res.status(400).json({ message: 'Username already exists' });
+            res.status(400).json({ message: 'Username already exists' });
+            return
         }
 
         // Hash password
@@ -36,13 +37,15 @@ const login = async (req, res) => {
         // Find user
         const user = await UserModel.findOne({ username });
         if (!user) {
-            return res.status(400).json({ message: 'Invalid credentials' });
+            res.status(400).json({ message: 'Invalid credentials' });
+            return;
         }
 
         // Check password
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
-            return res.status(400).json({ message: 'Invalid credentials' });
+            res.status(400).json({ message: 'Invalid credentials' });
+            return
         }
 
         // Generate token
