@@ -1,17 +1,13 @@
 const { Router } = require("express");
-
-const { shortenUrl , redirectUrl } = require('../controllers/urlControllers');
+const { shortenUrl, redirectUrl, getUserUrls } = require('../controllers/urlController');
+const { authMiddleware } = require('../middlewares/authMiddleware');
 
 const urlRouter = Router();
 
-
-// API to shorten URL
-urlRouter.post('/shorten', shortenUrl);
-
-// API to redirect to original URL
+urlRouter.post('/shorten', authMiddleware, shortenUrl);
 urlRouter.get('/:urlCode', redirectUrl);
-
+urlRouter.get('/user/urls', authMiddleware, getUserUrls);
 
 module.exports = {
-    urlRouter: urlRouter
-}
+    urlRouter
+};

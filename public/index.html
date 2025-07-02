@@ -5,191 +5,114 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/svg+xml" href="./assets/web.svg" />
-    <title>TheShortLink | The URL Shortener You Need!</title>
+    <title>URL Shortener || Best URL Shortener in the Market!</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: gainsboro;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .container {
-            background: #ffffff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 500px;
-            text-align: center;
-        }
-
-        h1 {
-            color: #333;
-            margin-bottom: 20px;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        input {
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            width: 100%;
-        }
-
-        button {
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            color: #fff;
-            background-color: #007BFF;
-            transition: transform 0.3s ease, background-color 0.3s ease;
-            /* transition: background-color 0.3s ease; */
-        }
-
-        button:hover {
-            transform: scale(1.06);
-            background-color: #8800ff;
-        }
-
-        button:disabled {
-            background-color: #aaa;
-            cursor: not-allowed;
-        }
-
-        .result {
-            margin-top: 20px;
-        }
-
-        .result.hidden {
-            display: none;
-        }
-
-        a {
-            text-decoration: none;
-            color: #007BFF;
-            word-wrap: break-word;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        .button-group {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            margin-top: 10px;
-        }
-
-        .githubRedirect {
-            font-size: 3rem;
-            color: #333;
-            transition: transform 0.3s ease, color 0.3s ease;
-        }
-
-        .githubRedirect:hover {
-            transform: scale(1.2);
-            color: #007bff;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <div id="developer">
-        Developed by <a href="https://www.linkedin.com/in/akshat-sahu-265462325/" target="_blank">Akshat Sahu</a>
-    </div>
-    <div class="container">
-        <a href="https://github.com/Akshattron/theshortlink-urlshortener" target="_blank">
-            <i class="fa-brands fa-github githubRedirect"></i>
-        </a>
-        <h1>The Short Link</h1>
-        <h3>Shorten those long URL's and relax!</h1>
-        <div class="form-group">
-            <label for="longUrl">Enter URL:</label>
-            <input type="text" id="longUrl" placeholder="Enter your long URL here" />
-            <button id="shortenBtn">Shorten URL</button>
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h2>URL Shortener</h2>
+            <button class="close-sidebar">&times;</button>
         </div>
-        <div id="result" class="result hidden">
-            <p>Shortened URL:</p>
-            <a id="shortenedUrl" target="_blank"></a>
-            <div class="button-group">
-                <button id="copyBtn">Copy</button>
-                <button id="redirectBtn">Redirect</button>
+
+        <div class="auth-section">
+            <div class="user-info hidden">
+                <div class="user-greeting">Welcome, <span id="usernameDisplay"></span>!</div>
+                <button id="logoutBtn" class="btn btn-logout">Logout</button>
+            </div>
+
+            <div class="auth-forms">
+                <div class="auth-form">
+                    <h3>Login</h3>
+                    <input type="text" id="loginUsername" placeholder="Username">
+                    <input type="password" id="loginPassword" placeholder="Password">
+                    <button id="loginBtn" class="btn btn-primary">Login</button>
+                </div>
+
+                <div class="auth-form">
+                    <h3>Sign Up</h3>
+                    <input type="text" id="signupUsername" placeholder="Username">
+                    <input type="password" id="signupPassword" placeholder="Password">
+                    <button id="signupBtn" class="btn btn-primary">Sign Up</button>
+                </div>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="#" class="nav-link active" data-page="home"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#" class="nav-link hidden" data-page="history" id="historyLink"><i
+                            class="fas fa-history"></i> My URLs</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Mobile Header -->
+        <header class="mobile-header">
+            <button class="menu-toggle"><i class="fas fa-bars"></i></button>
+            <h1>URL Shortener</h1>
+        </header>
+
+        <!-- Home Page -->
+        <div class="page active" id="home-page">
+            <div class="container">
+                <div class="developer-credit" style="font-weight: bolder; font-size: larger;">
+                    Developed by <a href="https://www.linkedin.com/in/akshat-sahu-265462325/" target="_blank">Akshat Sahu</a>
+                </div>
+
+                <div class="github-link">
+                    <a href="https://github.com/Akshattron/theshortlink-urlshortener" target="_blank">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+
+                <div class="url-form">
+                    <h2>The Short Link</h2>
+                    <h3 style="text-align: center;">Dont worry about the long URL's, Just CUT IT, and relax!</h3>
+                    <div class="form-group">
+                        <input type="text" id="longUrl" placeholder="Enter your long URL here">
+                        <button id="shortenBtn" class="btn btn-primary">Shorten URL</button>
+                    </div>
+
+                    <div id="result" class="result hidden">
+                        <p>Shortened URL:</p>
+                        <a id="shortenedUrl" target="_blank"></a>
+                        <div class="button-group">
+                            <button id="copyBtn" class="btn btn-secondary">Copy</button>
+                            <button id="redirectBtn" class="btn btn-secondary">Visit</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="signupPrompt" class="signup-prompt">
+                    Sign up to save your URLs and keep track of your history
+                </div>
+            </div>
+        </div>
+
+        <!-- History Page -->
+        <div class="page" id="history-page">
+            <div class="container">
+                <h2>Your Shortened URLs</h2>
+                <div id="historyList" class="history-list">
+                    <div class="empty-state">
+                        <i class="fas fa-link"></i>
+                        <p>No URLs found</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
+    <!-- Toast Notifications -->
+    <div id="toast" class="toast hidden"></div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.8/axios.min.js"></script>
-    <script>
-
-        const baseUrl = "https://theshortlink.vercel.app"; // backend URL
-
-        // Get elements
-        const longUrlInput = document.getElementById("longUrl");
-        const shortenBtn = document.getElementById("shortenBtn");
-        const resultDiv = document.getElementById("result");
-        const shortenedUrlLink = document.getElementById("shortenedUrl");
-        const copyBtn = document.getElementById("copyBtn");
-        const redirectBtn = document.getElementById("redirectBtn");
-
-        // Shorten URL function
-        const shortenUrl = async () => {
-            const longUrl = longUrlInput.value.trim();
-            if (!longUrl) {
-                alert("Please enter a valid URL.");
-                return;
-            }
-
-            try {
-                const response = await axios.post(`${baseUrl}/shorten`, { longUrl });
-                const { shortUrl } = response.data;
-
-                shortenedUrlLink.href = shortUrl;
-                shortenedUrlLink.textContent = shortUrl;
-                resultDiv.classList.remove("hidden");
-            } catch (error) {
-                console.error(error);
-                alert("Error shortening the URL. Please try again.");
-            }
-        };
-
-        // Copy to clipboard function
-        const copyToClipboard = () => {
-            const url = shortenedUrlLink.href;
-            navigator.clipboard.writeText(url).then(() => {
-                alert("Shortened URL copied to clipboard!");
-            }).catch((err) => {
-                console.error(err);
-                alert("Failed to copy the URL.");
-            });
-        };
-
-        // Redirect to the long URL
-        const redirectToUrl = () => {
-            const url = shortenedUrlLink.href;
-            window.open(url, "_blank");
-        };
-
-        // Event listeners
-        shortenBtn.addEventListener("click", shortenUrl);
-        copyBtn.addEventListener("click", copyToClipboard);
-        redirectBtn.addEventListener("click", redirectToUrl);
-
-
-    </script>
+    <script src="script.js"></script>
 </body>
 
 </html>

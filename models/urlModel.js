@@ -5,12 +5,12 @@ const UrlSchema = new Schema({
     longUrl: { type: String, required: true },
     shortUrl: { type: String, required: true, unique: true },
     urlCode: { type: String, required: true, unique: true },
+    user: { type: Schema.Types.ObjectId, ref: 'users' },
     date: { type: Date, default: Date.now }
 });
 
-// UrlModel:
-const UrlModel = mongoose.model("urls" , UrlSchema)
+const UrlModel = mongoose.model("urls", UrlSchema);
 
 module.exports = {
-    UrlModel: UrlModel
-}
+    UrlModel
+};
